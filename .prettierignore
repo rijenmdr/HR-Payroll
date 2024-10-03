@@ -1,0 +1,11 @@
+.env
+.env.example
+node_modules
+public
+*.md
+yarn.lock
+next-env.d.ts
+package-lock.json
+.next
+next-env.d.ts
+.vercel
