@@ -1,6 +1,7 @@
-import { lexend } from '../../font';
-
 import type { Metadata } from 'next';
+import { Providers } from './providers';
+
+import { lexend } from '../../font';
 
 import './globals.css';
 
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lexend.variable}`}>{children}</body>
+      <body className={`${lexend.variable}`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
