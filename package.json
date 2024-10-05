@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "pre-commit": "prettier --write . && git add . && next lint",
+    "prepare": "husky"
   },
   "dependencies": {
     "next": "14.2.14",
