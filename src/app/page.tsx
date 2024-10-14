@@ -1,9 +1,3 @@
-import { ThemeSwitcher } from '@/components/common/ThemeSwitcher';
-
 export default function Home() {
-  return (
-    <div className="flex">
-      <ThemeSwitcher />
-    </div>
-  );
+  return <div className="flex gap-4 p-5"></div>;
 }

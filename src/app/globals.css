@@ -2,12 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+* {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
   box-sizing: border-box;
+  font-family: var(--font-lexend);
 }
 
 @layer utilities {
+}
+
+@layer base {
+  :root {
+    --background: 0, 0%, 100%;
+    --foreground: 248.57deg 14.29% 9.61%;
+    --card: 0, 0%, 100%;
+    --card-foreground: 248.57deg 14.29% 9.61%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 248.57deg 14.29% 9.61%;
+    --radius: 0.4rem;
+  }
+
+  .dark {
+    --background: 248.57deg 14.29% 9.61%;
+    --foreground: 0, 0%, 100%;
+    --card: 248.57deg 14.29% 9.61%%;
+    --card-foreground: 0, 0%, 100%;
+    --popover: 248.57deg 14.29% 9.61%;
+    --popover-foreground: 0, 0%, 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
 }

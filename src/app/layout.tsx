@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
-import { Providers } from './providers';
 
+import { ThemeProvider } from './providers';
 import { lexend } from '../../font';
 
 import './globals.css';
@@ -18,7 +18,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lexend.variable}`}>
-        <Providers>{children}</Providers>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
