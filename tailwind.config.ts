@@ -48,6 +48,15 @@ const config: Config = {
           '500': '#A2A1A8', //500
           DEFAULT: '#A2A1A8',
         },
+        white: {
+          '50': '#FFFFFF0D',
+          '100': '#FFFFFF1A',
+          '200': '#A2A1A833',
+          '300': '#A2A1A8CC',
+          '400': '#A2A1A8E5',
+          '500': '#FFFFFF',
+          DEFAULT: '#FFFFFF',
+        },
         success: {
           '100': '#3FC28A1A',
           DEFAULT: '#3FC28A',

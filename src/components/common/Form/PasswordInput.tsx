@@ -1,22 +1,18 @@
 'use client';
-import { ChangeEvent, useState } from 'react';
-import { Input, InputProps } from '@/components/ui/input';
+import { useState } from 'react';
 import { ViewIcon, ViewOffSlashIcon } from 'hugeicons-react';
+import { FieldError } from 'react-hook-form';
+
+import { Input, InputProps } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
 interface Props extends Omit<InputProps, 'type'> {
   id: string;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  error?: FieldError;
   placeholder: string;
 }
 
-const PasswordInput = ({
-  id,
-  value,
-  onChange,
-  placeholder,
-  ...props
-}: Props) => {
+const PasswordInput = ({ id, value, error, placeholder, ...props }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -37,11 +33,13 @@ const PasswordInput = ({
         id={id}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        onChange={onChange}
         value={value}
         type={!showPassword ? 'password' : 'text'}
         {...props}
-        className={`${value ? 'border-primary' : ''}`}
+        className={cn(
+          `${value ? 'border-primary' : ''}`,
+          `${error ? 'border-destructive' : ''}`
+        )}
       />
 
       <div

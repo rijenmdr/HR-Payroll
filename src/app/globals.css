@@ -36,10 +36,60 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border font-lexend;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-lexend;
+  }
+
+  a {
+    @apply text-primary text-sm leading-[22px] font-light;
+  }
+}
+
+@layer utilities {
+  .heading-1 {
+    @apply text-[80px] leading-[100px];
+  }
+
+  .heading-2 {
+    @apply text-[60px] leading-[75px];
+  }
+
+  .heading-3 {
+    @apply text-[40px] leading-[50px];
+  }
+
+  .heading-4 {
+    @apply text-[30px] leading-[40px];
+  }
+
+  .heading-5 {
+    @apply text-2xl leading-[40px];
+  }
+
+  .heading-6 {
+    @apply text-xl leading-[30px];
+  }
+
+  .heading-7 {
+    @apply text-lg leading-[26px];
+  }
+
+  .body-1 {
+    @apply text-base leading-[24px];
+  }
+
+  .body-2 {
+    @apply text-sm leading-[22px];
+  }
+
+  .caption {
+    @apply text-xs leading-[18px];
+  }
+
+  .label {
+    @apply text-[11px] leading-[16px];
   }
 }

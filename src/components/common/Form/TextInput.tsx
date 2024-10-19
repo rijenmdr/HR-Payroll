@@ -1,15 +1,16 @@
 'use client';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { Input, InputProps } from '@/components/ui/input';
+import { FieldError } from 'react-hook-form';
+import { cn } from '@/lib/utils';
 
 interface Props extends InputProps {
   id: string;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  error?: FieldError;
   placeholder: string;
 }
 
-const TextInput = ({ id, value, onChange, placeholder, ...props }: Props) => {
+const TextInput = ({ id, value, placeholder, error, ...props }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (
@@ -25,10 +26,12 @@ const TextInput = ({ id, value, onChange, placeholder, ...props }: Props) => {
         id={id}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        onChange={onChange}
         value={value}
         {...props}
-        className={`${value ? 'border-primary' : ''}`}
+        className={cn(
+          `${value ? 'border-primary' : ''}`,
+          `${error ? 'border-destructive' : ''}`
+        )}
       />
     </div>
   );
