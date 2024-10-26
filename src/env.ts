@@ -11,6 +11,8 @@ const envSchema = z.object({
   DB_MIGRATING: z.coerce.boolean().default(false),
   DB_SEEDING: z.coerce.boolean().default(false),
   SECRET_KEY: z.string(),
+  ADMIN_EMAIL: z.string(),
+  ADMIN_PASSWORD: z.string(),
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
