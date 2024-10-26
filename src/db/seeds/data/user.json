@@ -1,0 +1,11 @@
+[
+  {
+    "name": "HR Admin",
+    "phone": "+9779813828181",
+    "phoneVerified": true,
+    "email": "hradmin@gmail.com",
+    "emailVerified": true,
+    "password": "A@dmin123",
+    "role": "admin"
+  }
+]

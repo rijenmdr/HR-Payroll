@@ -3,6 +3,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useFormState } from 'react-dom';
+import { useEffect, useRef } from 'react';
 
 import {
   Form,
@@ -13,11 +16,20 @@ import {
 } from '@/components/ui/form';
 import { loginFormSchema } from './validationSchema';
 import TextInput from '@/components/common/Form/TextInput';
-import { Button } from '@/components/ui/button';
 import PasswordInput from '@/components/common/Form/PasswordInput';
 import CheckboxInput from '@/components/common/Form/Checkbox';
+import { login } from '@/lib/action/user.action';
+import CButton from '@/components/common/Button/CButton';
+import useToast from '@/hook/useToast';
 
 const LoginForm = () => {
+  const [state, formAction] = useFormState(login, {
+    message: '',
+    status: 'idle',
+  });
+
+  const { showToast } = useToast();
+
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -25,13 +37,40 @@ const LoginForm = () => {
       password: '',
     },
   });
+  const router = useRouter();
 
-  const onSubmit = (values: z.infer<typeof loginFormSchema>) => {
-    console.log(values);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (state?.status === 'success') {
+      router.push('/dashboard');
+    }
+
+    if (state?.status === 'error') {
+      showToast('error', state?.message);
+    }
+  }, [state]);
+
+  const onSubmit = async (values: z.infer<typeof loginFormSchema>) => {
+    const formData = new FormData();
+
+    formData.append('email', values?.email);
+    formData.append('password', values?.password);
+
+    formAction(formData);
   };
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-[30px]">
+      <form
+        ref={formRef}
+        action={formAction}
+        onSubmit={(evt) => {
+          evt.preventDefault();
+          form.handleSubmit(onSubmit)(evt);
+        }}
+        className="space-y-[30px]"
+      >
         <div className="space-y-5">
           <FormField
             control={form.control}
@@ -77,9 +116,9 @@ const LoginForm = () => {
           </div>
         </div>
 
-        <Button type="submit" className="w-full">
+        <CButton type="submit" className="w-full">
           Login
-        </Button>
+        </CButton>
       </form>
     </Form>
   );

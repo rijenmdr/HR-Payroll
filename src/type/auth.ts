@@ -4,3 +4,8 @@ export type HandleStageChangeParams = {
   newStage: ForgotPasswordStage;
   email?: string;
 };
+
+export type SessionPayload = {
+  userId: string | number;
+  expiresAt: Date;
+};
