@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { Button, ButtonProps } from '@/components/ui/button';
+import { useFormStatus } from 'react-dom';
 
 interface Props extends ButtonProps {
   children?: ReactNode;
@@ -7,9 +8,17 @@ interface Props extends ButtonProps {
   rightSection?: ReactNode;
 }
 
-const CButton = ({ children, leftSection, rightSection, ...props }: Props) => {
+const CButton = ({
+  children,
+  leftSection,
+  rightSection,
+  disabled,
+  ...props
+}: Props) => {
+  const { pending } = useFormStatus();
   return (
-    <Button {...props}>
+    <Button disabled={pending || disabled} {...props}>
+      {pending ? 'Loading' : ''}
       {leftSection}
       {children}
       {rightSection}

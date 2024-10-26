@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import { ThemeProvider } from './providers';
 import { lexend } from '../../font';
+import { Toaster } from 'sonner';
 
 import './globals.css';
 
@@ -17,16 +18,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${lexend.variable}`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="light"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <body className={`${lexend.variable}`}>{children}</body>
+        <Toaster position={'top-right'} expand={true} richColors />
+      </ThemeProvider>
     </html>
   );
 }
