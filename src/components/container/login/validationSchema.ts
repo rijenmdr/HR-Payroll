@@ -9,4 +9,5 @@ export const loginFormSchema = z.object({
   password: z
     .string()
     .min(1, { message: VALIDATION_MESSAGE.PASSWORD_REQUIRED }),
+  rememberMe: z.boolean().optional().default(false),
 });

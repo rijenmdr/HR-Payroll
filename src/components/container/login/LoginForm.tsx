@@ -30,6 +30,7 @@ const LoginForm = () => {
     defaultValues: {
       email: '',
       password: '',
+      rememberMe: false,
     },
   });
   const formRef = useRef<HTMLFormElement>(null);
@@ -94,7 +95,24 @@ const LoginForm = () => {
           />
 
           <div className="flex justify-between items-center">
-            <CheckboxInput id="remember-me" label="Remember Me" />
+            <FormField
+              control={form.control}
+              name="rememberMe"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <CheckboxInput
+                      {...form.register('rememberMe')}
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      id="remember-me"
+                      label="Remember Me"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Link href={'/forgot-password'}>Forgot Password ?</Link>
           </div>
         </div>

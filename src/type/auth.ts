@@ -9,3 +9,8 @@ export type SessionPayload = {
   userId: string | number;
   expiresAt: Date;
 };
+
+export type SessionOptions = {
+  userId: string | number;
+  rememberMe?: boolean;
+};
