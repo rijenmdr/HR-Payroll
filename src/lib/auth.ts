@@ -41,7 +41,7 @@ export async function createSession(sessionOptions: SessionOptions) {
     sessionOptions.rememberMe
   );
 
-  cookies().set('session', session, {
+  (await cookies()).set('session', session, {
     httpOnly: true,
     secure: true,
     expires: expiresAt,
@@ -51,7 +51,7 @@ export async function createSession(sessionOptions: SessionOptions) {
 }
 
 export async function verifySession() {
-  const cookie = cookies().get('session')?.value;
+  const cookie = (await cookies()).get('session')?.value;
   const session = await decrypt(cookie);
 
   if (!session) {

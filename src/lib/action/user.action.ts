@@ -2,20 +2,20 @@
 
 import { eq } from 'drizzle-orm';
 import argon2 from 'argon2';
+import { flattenValidationErrors } from 'next-safe-action';
+import { redirect } from 'next/navigation';
 
+import { createSession } from '../auth';
 import { loginFormSchema } from '@/components/container/login/validationSchema';
 import db from '@/db';
 import { users } from '@/db/schema';
-import { createSession } from '../auth';
-import { redirect } from 'next/navigation';
 import { actionClient } from '../safe-action';
-import { flattenValidationErrors } from 'next-safe-action';
 import { LoginError } from '../errors';
 import { SessionOptions } from '@/type/auth';
 
 export const loginAction = actionClient
   .schema(loginFormSchema, {
-    handleValidationErrorsShape: (ve) => flattenValidationErrors(ve),
+    handleValidationErrorsShape: async (ve) => flattenValidationErrors(ve),
   })
   .action(async ({ parsedInput }) => {
     const user = await db.query.users.findFirst({
