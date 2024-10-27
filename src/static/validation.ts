@@ -5,4 +5,6 @@ export enum VALIDATION_MESSAGE {
   PASSWORD_REQUIRED = 'Password is required.',
 
   OTP_REQUIRED = 'Your OTP must be of 5 characters.',
+
+  SOMETHING_WENT_WRONG = 'Oh no, something went wrong!',
 }

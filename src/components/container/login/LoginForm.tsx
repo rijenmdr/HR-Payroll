@@ -3,9 +3,8 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useFormState } from 'react-dom';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
+import { useAction } from 'next-safe-action/hooks';
 
 import {
   Form,
@@ -18,16 +17,12 @@ import { loginFormSchema } from './validationSchema';
 import TextInput from '@/components/common/Form/TextInput';
 import PasswordInput from '@/components/common/Form/PasswordInput';
 import CheckboxInput from '@/components/common/Form/Checkbox';
-import { login } from '@/lib/action/user.action';
+import { loginAction } from '@/lib/action/user.action';
 import CButton from '@/components/common/Button/CButton';
 import useToast from '@/hook/useToast';
+import { VALIDATION_MESSAGE } from '@/static/validation';
 
 const LoginForm = () => {
-  const [state, formAction] = useFormState(login, {
-    message: '',
-    status: 'idle',
-  });
-
   const { showToast } = useToast();
 
   const form = useForm<z.infer<typeof loginFormSchema>>({
@@ -37,38 +32,26 @@ const LoginForm = () => {
       password: '',
     },
   });
-  const router = useRouter();
-
   const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => {
-    if (state?.status === 'success') {
-      router.push('/dashboard');
-    }
-
-    if (state?.status === 'error') {
-      showToast('error', state?.message);
-    }
-  }, [state]);
+  const { execute, isExecuting } = useAction(loginAction, {
+    onError: (error) => {
+      showToast(
+        'error',
+        error?.error?.serverError || VALIDATION_MESSAGE.SOMETHING_WENT_WRONG
+      );
+    },
+  });
 
   const onSubmit = async (values: z.infer<typeof loginFormSchema>) => {
-    const formData = new FormData();
-
-    formData.append('email', values?.email);
-    formData.append('password', values?.password);
-
-    formAction(formData);
+    execute(values);
   };
 
   return (
     <Form {...form}>
       <form
         ref={formRef}
-        action={formAction}
-        onSubmit={(evt) => {
-          evt.preventDefault();
-          form.handleSubmit(onSubmit)(evt);
-        }}
+        onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-[30px]"
       >
         <div className="space-y-5">
@@ -116,7 +99,7 @@ const LoginForm = () => {
           </div>
         </div>
 
-        <CButton type="submit" className="w-full">
+        <CButton loading={isExecuting} type="submit" className="w-full">
           Login
         </CButton>
       </form>
