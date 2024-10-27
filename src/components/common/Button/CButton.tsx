@@ -1,24 +1,25 @@
 import { ReactNode } from 'react';
 import { Button, ButtonProps } from '@/components/ui/button';
-import { useFormStatus } from 'react-dom';
+import { Loading03Icon } from 'hugeicons-react';
 
 interface Props extends ButtonProps {
+  loading?: boolean;
   children?: ReactNode;
   leftSection?: ReactNode;
   rightSection?: ReactNode;
 }
 
 const CButton = ({
+  loading = false,
   children,
   leftSection,
   rightSection,
   disabled,
   ...props
 }: Props) => {
-  const { pending } = useFormStatus();
   return (
-    <Button disabled={pending || disabled} {...props}>
-      {pending ? 'Loading' : ''}
+    <Button disabled={loading || disabled} {...props}>
+      {loading ? <Loading03Icon className="w-4 h-4 animate-spin" /> : null}
       {leftSection}
       {children}
       {rightSection}
