@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { SessionPayload } from '@/type/auth';
+import { SessionOptions, SessionPayload } from '@/type/auth';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { environment } from '@/env';
@@ -9,11 +9,11 @@ import { redirect } from 'next/navigation';
 const secretKey = environment.SECRET_KEY;
 const key = new TextEncoder().encode(secretKey);
 
-export async function encrypt(payload: SessionPayload) {
+export async function encrypt(payload: SessionPayload, rememberMe?: boolean) {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime('1hr')
+    .setExpirationTime(rememberMe ? '30d' : '1hr')
     .sign(key);
 }
 
@@ -29,10 +29,17 @@ export async function decrypt(session: string | undefined = '') {
   }
 }
 
-export async function createSession(id: number) {
-  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-
-  const session = await encrypt({ userId: id, expiresAt });
+export async function createSession(sessionOptions: SessionOptions) {
+  const expiresAt = new Date(
+    Date.now() +
+      (sessionOptions.rememberMe
+        ? 30 * 24 * 60 * 60 * 1000
+        : 1 * 60 * 60 * 1000)
+  );
+  const session = await encrypt(
+    { userId: sessionOptions?.userId, expiresAt },
+    sessionOptions.rememberMe
+  );
 
   cookies().set('session', session, {
     httpOnly: true,
