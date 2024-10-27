@@ -13,7 +13,7 @@ export default async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(path);
 
   // 3. Decrypt the session from the cookie
-  const cookie = cookies().get('session')?.value;
+  const cookie = (await cookies()).get('session')?.value;
   const session = await decrypt(cookie);
 
   // 4. Redirect
