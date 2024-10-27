@@ -18,15 +18,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="light"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <body className={`${lexend.variable}`}>{children}</body>
-        <Toaster position={'top-right'} expand={true} richColors />
-      </ThemeProvider>
+      <body className={`${lexend.variable}`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster position={'top-right'} expand={true} richColors />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
