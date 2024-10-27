@@ -38,8 +38,6 @@ const OTPSection = ({ email, handleStageChange }: Props) => {
     console.log(values);
   };
 
-  console.log(form.getValues());
-
   return (
     <>
       <div>
