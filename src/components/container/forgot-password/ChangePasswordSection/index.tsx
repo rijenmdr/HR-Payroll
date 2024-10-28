@@ -16,6 +16,8 @@ import {
 } from '@/components/ui/form';
 import { changePasswordSchema } from './validationSchema';
 import PasswordInput from '@/components/common/Form/PasswordInput';
+import { useDisclosure } from '@/hook/useDisclosure';
+import ChangePasswordSucess from './ChangePasswordSucess';
 
 type Props = {
   email: string;
@@ -23,6 +25,8 @@ type Props = {
 };
 
 const ChangePasswordSection = ({ email, handleStageChange }: Props) => {
+  const [open, { toggle }] = useDisclosure(false);
+
   const form = useForm<z.infer<typeof changePasswordSchema>>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
@@ -33,6 +37,7 @@ const ChangePasswordSection = ({ email, handleStageChange }: Props) => {
 
   const onSubmit = (values: z.infer<typeof changePasswordSchema>) => {
     console.log(values);
+    toggle();
   };
 
   return (
@@ -99,6 +104,8 @@ const ChangePasswordSection = ({ email, handleStageChange }: Props) => {
           </Button>
         </form>
       </Form>
+
+      <ChangePasswordSucess open={open} />
     </>
   );
 };
