@@ -40,12 +40,12 @@ const config: Config = {
           foreground: '#FFF',
         },
         gray: {
-          '50': '#A2A1A8E5', //50
-          '100': '#A2A1A81A', //10
-          '200': '#A2A1A833', //20
-          '300': '#A2A1A8CC', //80
-          '400': '#A2A1A8E5', //90
-          '500': '#A2A1A8', //500
+          '50': '#A2A1A8E5',
+          '100': '#A2A1A81A',
+          '200': '#A2A1A833',
+          '300': '#A2A1A8CC',
+          '400': '#A2A1A8E5',
+          '500': '#A2A1A8',
           DEFAULT: '#A2A1A8',
         },
         white: {
@@ -71,6 +71,17 @@ const config: Config = {
           '100': '#EFBE121A',
           DEFAULT: '#EFBE12',
           foreground: '#FFF',
+        },
+        sidebar: {
+          DEFAULT: 'hsl(var(--sidebar-background))',
+          foreground: 'hsl(var(--sidebar-foreground))',
+          primary: 'hsl(var(--sidebar-primary))',
+          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+          accent: 'hsl(var(--sidebar-accent))',
+          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+          footer: 'hsl(var(--sidebar-footer-background))',
+          border: 'hsl(var(--sidebar-border))',
+          ring: 'hsl(var(--sidebar-ring))',
         },
       },
       fontFamily: {
