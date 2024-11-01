@@ -16,7 +16,7 @@ import {
 import useValueBasedOnTheme from '@/hook/useValueBasedOnTheme';
 import { images } from '@/assets';
 import { sidebarLinks, themeSwitch } from '@/static/sidebar';
-import { SwitchTab } from './common/Form/SwitchTab';
+import { SwitchTab } from '@/components/common/Form/SwitchTab';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
