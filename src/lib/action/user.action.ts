@@ -12,6 +12,7 @@ import { users } from '@/db/schema';
 import { actionClient } from '../safe-action';
 import { LoginError } from '../errors';
 import { SessionOptions } from '@/type/auth';
+import { cookies } from 'next/headers';
 
 export const loginAction = actionClient
   .schema(loginFormSchema, {
@@ -44,3 +45,8 @@ export const loginAction = actionClient
 
     redirect('/dashboard');
   });
+
+export async function logout() {
+  (await cookies()).delete('session');
+  redirect('/login');
+}
