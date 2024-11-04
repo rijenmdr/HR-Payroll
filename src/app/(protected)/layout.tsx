@@ -22,7 +22,7 @@ export default function RootLayout({
         <SidebarInset>
           <div className="py-5">
             <Header />
-            <main className="pl-[30px] md:pl-[0px] pr-[30px] mt-20 min-h-[calc(100svh-theme(spacing.20))]">
+            <main className="pl-[30px] md:pl-[0px] pr-[30px] mt-[92px] min-h-[calc(100svh-theme(spacing.[92px]]))]">
               {children}
             </main>
           </div>
