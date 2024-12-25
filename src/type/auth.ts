@@ -11,6 +11,6 @@ export type SessionPayload = {
 };
 
 export type SessionOptions = {
-  userId: string | number;
+  userId: number;
   rememberMe?: boolean;
 };

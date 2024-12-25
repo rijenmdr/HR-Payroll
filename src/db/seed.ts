@@ -2,10 +2,10 @@ import { Table, getTableName, sql } from 'drizzle-orm';
 import { db, connection } from '@/db';
 import * as schema from '@/db/schema';
 import * as seeds from './seeds';
-import { environment } from '@/env';
+import { ENV } from '@/static/env';
 
 async function main() {
-  if (!environment.DB_SEEDING) {
+  if (!ENV.DB_SEEDING) {
     throw new Error('You must set DB_SEEDING to "true" when running seeds');
   }
 

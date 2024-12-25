@@ -1,13 +1,13 @@
-import { environment } from '@/env';
+import { ENV } from '@/static/env';
 
 export const users = [
   {
     name: 'HR Admin',
     phone: '+9779813828181',
     phoneVerified: true,
-    email: environment.ADMIN_EMAIL,
+    email: ENV.ADMIN_EMAIL,
     emailVerified: true,
-    password: environment.ADMIN_PASSWORD,
+    password: ENV.ADMIN_PASSWORD,
     role: 'admin',
   },
 ];
