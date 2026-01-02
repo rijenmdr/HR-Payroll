@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${lexend.variable}`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={lexend.variable}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -26,7 +26,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
-          <Toaster position={'top-right'} expand={true} richColors />
+          <Toaster position="top-right" expand richColors />
         </ThemeProvider>
       </body>
     </html>

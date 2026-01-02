@@ -1,11 +1,15 @@
+import { config } from 'dotenv';
+
+// Load environment variables before anything else
+config({ path: '.env.local' });
+
 import { Table, getTableName, sql } from 'drizzle-orm';
 import { db, connection } from '@/db';
 import * as schema from '@/db/schema';
 import * as seeds from './seeds';
-import { ENV } from '@/static/env';
 
 async function main() {
-  if (!ENV.DB_SEEDING) {
+  if (!process.env.DB_SEEDING) {
     throw new Error('You must set DB_SEEDING to "true" when running seeds');
   }
 

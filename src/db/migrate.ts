@@ -1,6 +1,9 @@
-import 'dotenv/config';
+import { config } from 'dotenv';
 
-import config from '../../drizzle.config';
+// Load environment variables before anything else
+config({ path: '.env.local' });
+
+import drizzleConfig from '../../drizzle.config';
 
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 import db, { connection } from './index';
@@ -13,7 +16,7 @@ async function main() {
     );
   }
 
-  await migrate(db, { migrationsFolder: config.out! });
+  await migrate(db, { migrationsFolder: drizzleConfig.out! });
 
   await connection.end();
 }

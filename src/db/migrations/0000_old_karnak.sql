@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"phone_verified" boolean DEFAULT false,
 	"email" varchar(255) NOT NULL,
 	"email_verified" boolean DEFAULT false,
-	"confirmation_code" varchar(255),
+	"profile_img" varchar(255),
 	"role" varchar(255),
 	"password" varchar(255) NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL,

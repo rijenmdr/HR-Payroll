@@ -37,4 +37,8 @@ export const env = createEnv({
     EMAIL_USER: process.env.EMAIL_USER,
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
   },
+  // Skip validation in Edge runtime (middleware) or during build
+  skipValidation:
+    !!process.env.SKIP_ENV_VALIDATION ||
+    process.env.npm_lifecycle_event === 'lint',
 });

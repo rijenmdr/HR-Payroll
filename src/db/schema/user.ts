@@ -15,7 +15,7 @@ export const users = pgTable('users', {
   phoneVerified: boolean('phone_verified').default(false),
   email: varchar('email', { length: 255 }).notNull().unique(),
   emailVerified: boolean('email_verified').default(false),
-  profileImg: varchar('confirmation_code', { length: 255 }),
+  profileImg: varchar('profile_img', { length: 255 }),
   role: varchar('role', { length: 255 }),
   password: varchar('password', { length: 255 }).notNull(),
   createdAt: timestamp('created_at', { mode: 'string' }).notNull().defaultNow(),

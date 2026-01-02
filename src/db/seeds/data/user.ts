@@ -1,13 +1,16 @@
-import { ENV } from '@/static/env';
+import { config } from 'dotenv';
+
+// Load environment variables before anything else
+config({ path: '.env.local' });
 
 export const users = [
   {
     name: 'HR Admin',
     phone: '+9779813828181',
     phoneVerified: true,
-    email: ENV.ADMIN_EMAIL,
+    email: process.env.ADMIN_EMAIL!,
     emailVerified: true,
-    password: ENV.ADMIN_PASSWORD,
+    password: process.env.ADMIN_PASSWORD!,
     role: 'admin',
   },
 ];

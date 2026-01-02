@@ -1,5 +1,5 @@
 {
-  "id": "204baa1a-0e8e-4abf-b347-3e0e3cf9eb2a",
+  "id": "713fd94b-e310-4f02-b1e8-abd9897ac773",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -85,8 +85,8 @@
           "notNull": false,
           "default": false
         },
-        "confirmation_code": {
-          "name": "confirmation_code",
+        "profile_img": {
+          "name": "profile_img",
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
